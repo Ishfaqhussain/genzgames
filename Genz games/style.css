@@ -1,0 +1,123 @@
+:root {
+    --primary: #2c3e50;
+    --accent: #3498db;
+    --bg: #f4f6f8;
+    --white: #ffffff;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px; /* Optimal reading width */
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.video-card {
+    border-top: 4px solid var(--accent);
+}
+
+.badge {
+    background: #e1ecf4;
+    color: var(--accent);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+video {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+    background: #000;
+}
+
+/* Custom Radio Buttons */
+.options {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.radio-btn {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+}
+
+.radio-btn input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.radio-btn span {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.radio-btn input:checked + span {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-btn:hover {
+    background: #1a252f;
+}
+
+.submit-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+#status-message {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}

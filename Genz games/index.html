@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Perception Study | University of Kashmir</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Visual Perception Study</h1>
+            <p class="subtitle">Research on Synthetic Media Detection</p>
+            <p class="disclaimer">By submitting, you agree to participate in this academic study.</p>
+        </header>
+
+        <form name="ai_study_v1" id="researchForm">
+            
+            <section class="card">
+                <h3>Participant Profile</h3>
+                <div class="form-group">
+                    <label>Which generation do you belong to?</label>
+                    <select name="generation" required>
+                        <option value="" disabled selected>Select your group...</option>
+                        <option value="GenZ">Gen Z (1997-2012)</option>
+                        <option value="Millennial">Millennial (1981-1996)</option>
+                        <option value="Alpha">Gen Alpha (2013-Present)</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="card video-card" id="q1">
+                <span class="badge">Video 1</span>
+                
+                <video src="videos/v1.mp4" controls controlslist="nodownload" class="research-video" data-id="v1"></video>
+                
+                <div class="question-block">
+                    <p>Is this video Real or AI-Generated?</p>
+                    <div class="options">
+                        <label class="radio-btn">
+                            <input type="radio" name="v1_answer" value="Real" required data-id="v1"> 
+                            <span>Real</span>
+                        </label>
+                        <label class="radio-btn">
+                            <input type="radio" name="v1_answer" value="AI" required data-id="v1"> 
+                            <span>AI</span>
+                        </label>
+                    </div>
+                </div>
+
+                <input type="hidden" name="v1_time" id="v1_timer">
+            </section>
+
+            <section class="card video-card" id="q2">
+                <span class="badge">Video 2</span>
+                
+                <video src="videos/v2.mp4" controls controlslist="nodownload" class="research-video" data-id="v2"></video>
+                
+                <div class="question-block">
+                    <p>Is this video Real or AI-Generated?</p>
+                    <div class="options">
+                        <label class="radio-btn">
+                            <input type="radio" name="v2_answer" value="Real" required data-id="v2"> 
+                            <span>Real</span>
+                        </label>
+                        <label class="radio-btn">
+                            <input type="radio" name="v2_answer" value="AI" required data-id="v2"> 
+                            <span>AI</span>
+                        </label>
+                    </div>
+                </div>
+
+                <input type="hidden" name="v2_time" id="v2_timer">
+            </section>
+
+            <button type="submit" class="submit-btn">Submit Responses</button>
+            <p id="status-message"></p>
+        </form>
+    </div> <div style="margin-bottom: 20px; font-size: 0.9rem;">
+    <label>
+        <input type="checkbox" required> 
+        I understand that my responses are anonymous and will be used for research purposes.
+    </label>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
