@@ -1,123 +1,201 @@
 :root {
-    --primary: #2c3e50;
-    --accent: #3498db;
-    --bg: #f4f6f8;
-    --white: #ffffff;
+    --primary: #2563eb;       /* Royal Blue */
+    --primary-dark: #1e40af;
+    --bg: #f3f4f6;           /* Light Gray */
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-sub: #6b7280;
+    --border: #e5e7eb;
+    --success: #10b981;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg);
-    color: #333;
-    line-height: 1.6;
+    color: var(--text-main);
     margin: 0;
-    padding: 20px;
+    padding: 20px 10px;
+    line-height: 1.5;
 }
 
 .container {
-    max-width: 600px; /* Optimal reading width */
+    max-width: 640px;
     margin: 0 auto;
 }
 
+/* Header */
 header {
     text-align: center;
     margin-bottom: 30px;
 }
 
+.logo {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+h1 {
+    font-size: 1.75rem;
+    margin: 0 0 5px 0;
+    color: #111;
+}
+
 .subtitle {
-    color: #666;
-    font-size: 0.9rem;
+    color: var(--text-sub);
+    font-size: 0.95rem;
 }
 
+/* Cards */
 .card {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 25px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
 }
 
-.video-card {
-    border-top: 4px solid var(--accent);
+/* Intro & Consent */
+.intro-card {
+    border-left: 5px solid var(--primary);
+}
+
+.consent-box {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.checkbox-container input {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: var(--primary);
+}
+
+.styled-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+}
+
+/* Video Cards */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .badge {
-    background: #e1ecf4;
-    color: var(--accent);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    background: #eff6ff;
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
+}
+
+.instruction {
+    font-size: 0.8rem;
+    color: var(--text-sub);
 }
 
 video {
     width: 100%;
-    border-radius: 8px;
-    margin-top: 10px;
+    border-radius: 10px;
     background: #000;
+    display: block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Custom Radio Buttons */
-.options {
-    display: flex;
+.question-text {
+    font-weight: 600;
+    margin: 20px 0 10px 0;
+    text-align: center;
+}
+
+/* Big Touch Buttons */
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
-    margin-top: 15px;
 }
 
-.radio-btn {
-    flex: 1;
+.option-card {
     cursor: pointer;
     position: relative;
 }
 
-.radio-btn input {
+.option-card input {
     position: absolute;
-    opacity: 0;
-    cursor: pointer;
+    opacity: 0; /* Hide actual radio */
 }
 
-.radio-btn span {
-    display: block;
-    text-align: center;
-    padding: 12px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-weight: 600;
+.option-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
     transition: all 0.2s ease;
+    background: white;
 }
 
-.radio-btn input:checked + span {
-    background-color: var(--accent);
-    color: white;
-    border-color: var(--accent);
-    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+.emoji {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
 }
 
+/* Selected State */
+.option-card input:checked + .option-content {
+    border-color: var(--primary);
+    background-color: #eff6ff;
+    color: var(--primary);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Submit Button */
 .submit-btn {
     width: 100%;
-    padding: 16px;
     background: var(--primary);
     color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
+    padding: 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
 }
 
 .submit-btn:hover {
-    background: #1a252f;
+    background: var(--primary-dark);
 }
 
 .submit-btn:disabled {
-    background: #ccc;
+    background: #9ca3af;
     cursor: not-allowed;
-}
-
-#status-message {
-    text-align: center;
-    margin-top: 10px;
-    font-weight: bold;
+    box-shadow: none;
 }
