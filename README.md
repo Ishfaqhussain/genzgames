@@ -1,2 +1,2 @@
 # genzgames
-Games Gen-Z Plays
+Games Gen-Z Play
