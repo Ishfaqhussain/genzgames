@@ -63,34 +63,79 @@ const form = document.getElementById('researchForm');
 const submitBtn = document.querySelector('.submit-btn');
 const statusMsg = document.getElementById('status-message');
 
+// ==========================================
+// 3. GAMIFIED SUBMISSION & ROAST LOGIC
+// ==========================================
+const form = document.getElementById('researchForm');
+const submitBtn = document.querySelector('.submit-btn');
+const statusMsg = document.getElementById('status-message');
+const resultsScreen = document.getElementById('results-screen');
+
+// 🔴 THE ANSWER KEY: Set the correct answers for your videos here
+const answerKey = {
+    v1_answer: "Real", 
+    v2_answer: "AI"    
+    // Add v3_answer, v4_answer, etc., as you build your 40 videos
+};
+
 form.addEventListener('submit', e => {
     e.preventDefault();
     
-    // Disable button to prevent double-submit
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = "Submitting Data...";
-    statusMsg.style.color = "#666";
-    statusMsg.innerText = "Please wait, sending responses...";
+    // 1. GRADE THE USER INSTANTLY
+    let score = 0;
+    const totalQuestions = Object.keys(answerKey).length;
+    const formData = new FormData(form);
 
-    // Send data using Fetch API
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    for (const [question, correctAnswer] of Object.entries(answerKey)) {
+        if (formData.get(question) === correctAnswer) {
+            score++;
+        }
+    }
+
+    // 2. DETERMINE THE ROAST (Calculate Percentage)
+    const percentage = (score / totalQuestions) * 100;
+    let title = "";
+    let message = "";
+
+    if (percentage === 100) {
+        title = "Are you a terminator?";
+        message = "Flawless. You see right through the matrix. Please protect us when the robots take over.";
+    } else if (percentage >= 75) {
+        title = "Not completely useless!";
+        message = "You survived... barely. You're smart enough to avoid obvious scams, but a good deepfake will still steal your identity.";
+    } else if (percentage >= 50) {
+        title = "Absolute NPC Energy.";
+        message = "Average. Mediocre. You're definitely out here forwarding WhatsApp University rumors to your family group chat without checking them.";
+    } else if (percentage > 0) {
+        title = "A Threat to Society.";
+        message = "Oof. You are the exact reason Nigerian Princes still make a living sending emails. Please stay off the internet for your own safety.";
+    } else {
+        title = "Certified Room Temperature IQ.";
+        message = "Zero points?! Did you even open your eyes, or did you just smash the screen with your forehead? Even a random number generator would score higher.";
+    }
+
+    // 3. UPDATE THE UI
+    document.getElementById('user-score').innerText = score;
+    document.getElementById('total-questions').innerText = totalQuestions;
+    document.getElementById('roast-title').innerText = title;
+    document.getElementById('roast-message').innerText = message;
+
+    // 4. DISABLE BUTTON & SEND TO GOOGLE SHEETS
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "Calculating your IQ...";
+    
+    fetch(scriptURL, { method: 'POST', body: formData })
         .then(response => {
-            // SUCCESS
-            alert("Thank you! Your participation is recorded.");
-            form.reset();
+            // Hide the form, show the roast!
+            form.style.display = 'none';
+            resultsScreen.style.display = 'block';
             window.scrollTo(0, 0); 
-            
-            // Reset UI
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = "Submit Research Data";
-            statusMsg.innerText = "";
-            startTimes = {}; // Clear timers for next user (if shared device)
         })
         .catch(error => {
-            // ERROR (Usually just a console warning, data often still sends)
             console.error('Error!', error.message);
-            alert("Response saved! (You may close this window)");
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = "Submit Research Data";
+            // Even if Google Sheets fails due to CORS, still show them their roast
+            form.style.display = 'none';
+            resultsScreen.style.display = 'block';
+            window.scrollTo(0, 0);
         });
 });
