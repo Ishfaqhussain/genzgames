@@ -1,201 +1,122 @@
-:root {
-    --primary: #2563eb;       /* Royal Blue */
-    --primary-dark: #1e40af;
-    --bg: #f3f4f6;           /* Light Gray */
-    --card-bg: #ffffff;
-    --text-main: #1f2937;
-    --text-sub: #6b7280;
-    --border: #e5e7eb;
-    --success: #10b981;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg);
-    color: var(--text-main);
-    margin: 0;
-    padding: 20px 10px;
-    line-height: 1.5;
-}
-
-.container {
-    max-width: 640px;
-    margin: 0 auto;
-}
-
-/* Header */
-header {
+/* =========================================
+   RESULTS SCREEN & SCREENSHOT CARD STYLES
+   ========================================= */
+.text-center {
     text-align: center;
-    margin-bottom: 30px;
 }
 
-.logo {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--primary);
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-h1 {
-    font-size: 1.75rem;
-    margin: 0 0 5px 0;
-    color: #111;
-}
-
-.subtitle {
-    color: var(--text-sub);
-    font-size: 0.95rem;
-}
-
-/* Cards */
-.card {
-    background: var(--card-bg);
+/* The card that gets screenshotted */
+.share-card {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    padding: 40px 20px;
     border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-}
-
-/* Intro & Consent */
-.intro-card {
-    border-left: 5px solid var(--primary);
-}
-
-.consent-box {
-    background: #f8fafc;
-    padding: 15px;
-    border-radius: 8px;
     margin-bottom: 20px;
-    border: 1px solid var(--border);
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
 }
 
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.checkbox-container input {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
-    accent-color: var(--primary);
-}
-
-.styled-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: white;
-}
-
-/* Video Cards */
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.badge {
-    background: #eff6ff;
-    color: var(--primary);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
+.share-title {
+    font-size: 1.2rem;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 5px 0;
+    color: #bfdbfe;
 }
 
-.instruction {
-    font-size: 0.8rem;
-    color: var(--text-sub);
+.share-subtitle {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.9;
 }
 
-video {
-    width: 100%;
-    border-radius: 10px;
-    background: #000;
-    display: block;
+.score-circle {
+    width: 120px;
+    height: 120px;
+    background: white;
+    color: #1e3a8a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 20px auto;
+    border: 5px solid #60a5fa;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.roast-title {
+    color: white;
+    font-size: 1.6rem;
+    margin-top: 20px;
+}
+
+.roast-message {
+    color: #eff6ff;
+    font-size: 1.05rem;
+    padding: 0 15px;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.share-footer {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #bfdbfe;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Back to Home Link */
+.home-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #e5e7eb;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.home-link:hover {
+    background: #d1d5db;
+}
+/* =========================================
+   SOCIAL SHARE BUTTONS
+   ========================================= */
+.social-share-container {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.2s, opacity 0.2s;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.question-text {
-    font-weight: 600;
-    margin: 20px 0 10px 0;
-    text-align: center;
-}
-
-/* Big Touch Buttons */
-.options-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.option-card {
-    cursor: pointer;
-    position: relative;
-}
-
-.option-card input {
-    position: absolute;
-    opacity: 0; /* Hide actual radio */
-}
-
-.option-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    transition: all 0.2s ease;
-    background: white;
-}
-
-.emoji {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-}
-
-/* Selected State */
-.option-card input:checked + .option-content {
-    border-color: var(--primary);
-    background-color: #eff6ff;
-    color: var(--primary);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+.social-btn:hover {
+    opacity: 0.9;
     transform: translateY(-2px);
 }
 
-/* Submit Button */
-.submit-btn {
-    width: 100%;
-    background: var(--primary);
-    color: white;
-    padding: 16px;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
-}
-
-.submit-btn:hover {
-    background: var(--primary-dark);
-}
-
-.submit-btn:disabled {
-    background: #9ca3af;
-    cursor: not-allowed;
-    box-shadow: none;
-}
+.wa { background: #25D366; }
+.x { background: #000000; }
+.reddit { background: #FF4500; }
