@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Perception Study | University of Kashmir</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">AI vs Real Research</div>
+            <h1>Synthetic Media Detection Study</h1>
+            <p class="subtitle">Can you distinguish between Reality and AI?</p>
+        </header>
+
+        <form name="ai_study_v1" id="researchForm">
+            
+            <section class="card intro-card">
+                <div class="consent-box">
+                    <label class="checkbox-container">
+                        <input type="checkbox" required>
+                        <span class="checkmark"></span>
+                        <span class="text">I agree to participate in this anonymous academic study.</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="label-heading">Which generation do you belong to?</label>
+                    <select name="generation" required class="styled-select">
+                        <option value="" disabled selected>Select your group...</option>
+                        <option value="GenZ">Gen Z (1997-2012)</option>
+                        <option value="Millennial">Millennial (1981-1996)</option>
+                        <option value="Alpha">Gen Alpha (2013-Present)</option>
+                        <option value="GenX">Gen X (1965-1980)</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="card video-card">
+                <div class="card-header">
+                    <span class="badge">Video 01</span>
+                    <span class="instruction">Watch carefully, then decide.</span>
+                </div>
+                
+                <div class="video-wrapper">
+                    <video src="videos/v1.mp4" controls controlslist="nodownload" class="research-video" data-id="v1"></video>
+                </div>
+
+                <div class="question-block">
+                    <p class="question-text">Is this video Real or AI-Generated?</p>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="v1_answer" value="Real" required data-id="v1">
+                            <div class="option-content">
+                                <span class="emoji">📹</span>
+                                <span>Real Video</span>
+                            </div>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="v1_answer" value="AI" required data-id="v1">
+                            <div class="option-content">
+                                <span class="emoji">🤖</span>
+                                <span>AI Generated</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <input type="hidden" name="v1_time" id="v1_timer">
+            </section>
+
+            <section class="card video-card">
+                <div class="card-header">
+                    <span class="badge">Video 02</span>
+                    <span class="instruction">Watch carefully, then decide.</span>
+                </div>
+                
+                <div class="video-wrapper">
+                    <video src="videos/v2.mp4" controls controlslist="nodownload" class="research-video" data-id="v2"></video>
+                </div>
+
+                <div class="question-block">
+                    <p class="question-text">Is this video Real or AI-Generated?</p>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="v2_answer" value="Real" required data-id="v2">
+                            <div class="option-content">
+                                <span class="emoji">📹</span>
+                                <span>Real Video</span>
+                            </div>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="v2_answer" value="AI" required data-id="v2">
+                            <div class="option-content">
+                                <span class="emoji">🤖</span>
+                                <span>AI Generated</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <input type="hidden" name="v2_time" id="v2_timer">
+            </section>
+
+            <div class="submit-area">
+                <button type="submit" class="submit-btn">Submit Research Data</button>
+                <p id="status-message"></p>
+            </div>
+        </form>
+
+        <div id="results-screen" style="display: none;" class="card text-center">
+            
+            <div id="capture-area" class="share-card">
+                <h2 class="share-title">Synthetic Media Study</h2>
+                <p class="share-subtitle">My AI Detection Score:</p>
+                
+                <div class="score-circle">
+                    <span id="user-score">0</span>/<span id="total-questions">2</span>
+                </div>
+                
+                <h3 id="roast-title" class="roast-title"></h3>
+                <p id="roast-message" class="roast-message"></p>
+                
+                <div class="share-footer">
+                   gamifiedquiz1.web.app
+                </div>
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Your data was successfully submitted for research. Thanks for being a guinea pig!</p>
+            
+            <button id="download-btn" class="submit-btn" style="background: #10b981; margin-bottom: 15px;">
+                📸 Download Score to Share
+            </button>
+<div class="social-share-container">
+                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px;">Or share your score directly:</p>
+                <div class="social-buttons">
+                    <a href="#" id="share-wa" target="_blank" class="social-btn wa">WhatsApp</a>
+                    <a href="#" id="share-x" target="_blank" class="social-btn x">X (Twitter)</a>
+                    <a href="#" id="share-reddit" target="_blank" class="social-btn reddit">Reddit</a>
+                </div>
+                <p style="font-size: 0.8rem; color: #888;">For Instagram, use the Download button above and add it to your Story!</p>
+            </div>
+
+            <br>
+                        <a href="https://gamifiedquiz1.web.app
+" class="home-link">Take a Digital Literacy Quiz</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
