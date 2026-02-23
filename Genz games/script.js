@@ -102,7 +102,7 @@ const percentage = (score / totalQuestions) * 100;
     // 5. GENERATE DYNAMIC SOCIAL SHARE LINKS
     // IMPORTANT: Replace this with your actual Netlify Live URL once deployed!
     const testUrl = "https://genzgames.netlify.app"; 
-    const shareText = `I just scored ${score}/${totalQuestions} on the UoK AI Deepfake Test! Are you a Terminator or an NPC? Take the test: `;
+    const shareText = `I just scored ${score}/${totalQuestions} on the LIS AI Deepfake Test! Are you a Terminator or an NPC? Take the test: `;
 
     document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + testUrl)}`;
     document.getElementById('share-x').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(testUrl)}`;
