@@ -67,21 +67,27 @@ form.addEventListener('submit', e => {
     }
 
     // Determine the Roast
-    const percentage = (score / totalQuestions) * 100;
+  
+const percentage = (score / totalQuestions) * 100;
     let title = "";
     let message = "";
 
     if (percentage === 100) {
-        title = "Are you a Terminator?";
+        title = "Are you a terminator?";
         message = "Flawless. You see right through the matrix. Please protect us when the robots take over.";
+    } else if (percentage >= 75) {
+        title = "Not completely useless!";
+        message = "You survived... barely. You're smart enough to avoid obvious scams, but a good deepfake will still steal your identity.";
     } else if (percentage >= 50) {
         title = "Absolute NPC Energy.";
-        message = "Mediocre. You're definitely out here forwarding WhatsApp University rumors to your family group chat without checking them.";
+        message = "Average. Mediocre. You're definitely out here forwarding WhatsApp University rumors to your family group chat without checking them.";
+    } else if (percentage > 0) {
+        title = "A Threat to Society.";
+        message = "Oof. You are the exact reason Nigerian Princes still make a living sending emails. Please stay off the internet for your own safety.";
     } else {
         title = "Certified Room Temperature IQ.";
-        message = "Zero points?! Did you even open your eyes, or did you just smash the screen with your forehead? A random number generator would score higher.";
+        message = "Zero points?! Did you even open your eyes, or did you just smash the screen with your forehead? Even a random number generator would score higher.";
     }
-
     // Update the UI
     document.getElementById('user-score').innerText = score;
     document.getElementById('total-questions').innerText = totalQuestions;
@@ -95,7 +101,7 @@ form.addEventListener('submit', e => {
 
     // 5. GENERATE DYNAMIC SOCIAL SHARE LINKS
     // IMPORTANT: Replace this with your actual Netlify Live URL once deployed!
-    const testUrl = "https://your-site-name.netlify.app"; 
+    const testUrl = "https://genzgames.netlify.app"; 
     const shareText = `I just scored ${score}/${totalQuestions} on the UoK AI Deepfake Test! Are you a Terminator or an NPC? Take the test: `;
 
     document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + testUrl)}`;
