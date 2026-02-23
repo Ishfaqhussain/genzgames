@@ -139,3 +139,53 @@ form.addEventListener('submit', e => {
             window.scrollTo(0, 0);
         });
 });
+// ==========================================
+// 4. HTML2CANVAS SCREENSHOT LOGIC
+// ==========================================
+const downloadBtn = document.getElementById('download-btn');
+
+if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+        // Change button text temporarily
+        const originalText = downloadBtn.innerHTML;
+        downloadBtn.innerHTML = "Generating Image...";
+        downloadBtn.disabled = true;
+
+        // Select the specific div to capture
+        const captureArea = document.getElementById('capture-area');
+
+        // html2canvas configuration for high-quality mobile renders
+        html2canvas(captureArea, {
+            scale: 2, // Increases resolution of the downloaded image
+            useCORS: true, // Allows cross-origin elements if needed
+            backgroundColor: null // Keeps border radius intact
+        }).then(canvas => {
+            // Convert canvas to image URL
+            const imageURL = canvas.toDataURL("image/png");
+
+            // Create a temporary link to trigger download
+            const link = document.createElement('a');
+            link.download = 'AI-Detection-Score.png';
+            link.href = imageURL;
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Reset button
+            downloadBtn.innerHTML = "✅ Downloaded! Now share it.";
+            
+            // Reset text after 3 seconds
+            setTimeout(() => {
+                downloadBtn.innerHTML = originalText;
+                downloadBtn.disabled = false;
+            }, 3000);
+        }).catch(err => {
+            console.error("Screenshot failed:", err);
+            alert("Oops! Couldn't generate the image. Try taking a normal screenshot!");
+            downloadBtn.innerHTML = originalText;
+            downloadBtn.disabled = false;
+        });
+    });
+}

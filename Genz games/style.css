@@ -246,3 +246,55 @@ video {
 .home-link:hover {
     background: #d1d5db;
 }
+
+/* Share Card Styles (The part that gets screenshotted) */
+.share-card {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    padding: 40px 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.share-title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 5px 0;
+    color: #bfdbfe;
+}
+
+.share-subtitle {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.share-card .score-circle {
+    background: white;
+    color: #1e3a8a;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border: 5px solid #60a5fa;
+}
+
+.share-card .roast-title {
+    color: white;
+    font-size: 1.6rem;
+    margin-top: 20px;
+}
+
+.share-card .roast-message {
+    color: #eff6ff;
+    font-size: 1.05rem;
+    padding: 0 15px;
+}
+
+.share-footer {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #bfdbfe;
+    text-align: center;
+    letter-spacing: 1px;
+}
