@@ -31,20 +31,23 @@
                     <label class="label-heading">Which generation do you belong to?</label>
                     <select name="generation" required class="styled-select">
                         <option value="" disabled selected>Select your group...</option>
+                        <option value="Alpha">Gen Alpha (2013-Present)</option>
                         <option value="GenZ">Gen Z (1997-2012)</option>
                         <option value="Millennial">Millennial (1981-1996)</option>
-                        <option value="Alpha">Gen Alpha (2013-Present)</option>
                         <option value="GenX">Gen X (1965-1980)</option>
+                        <option value="Baby_boomers">Baby Boomers (Born 1946–1964)</option>
                     </select>
-<label class="label-heading">Current level of education?</label>
+
+                    <label class="label-heading" style="margin-top: 15px; display: block;">Current level of education?</label>
                     <select name="Education Level" required class="styled-select">
                         <option value="" disabled selected>Select your group...</option>
-                        <option value="Higher Secondary">Higher Secondary/High School</option>
+                        <option value="Higher_Secondary">Higher Secondary/High School</option>
                         <option value="Undergraduate">Undergraduate (Bachelors)</option>
                         <option value="postgraduate">Postgraduate (Masters)</option>
                         <option value="PhD">PhD Scholar/Doctorate</option>
                     </select>
-                    <label class="label-heading">What is your primary field of study?</label>
+
+                    <label class="label-heading" style="margin-top: 15px; display: block;">What is your primary field of study?</label>
                     <select name="study_field" required class="styled-select">
                         <option value="" disabled selected>Select your field...</option>
                         <option value="Medical_Health">Medical & Health Sciences</option>
@@ -54,81 +57,18 @@
                         <option value="Business_Commerce">Business & Commerce</option>
                         <option value="Other">Other</option>
                     </select>
-<label class="label-heading"> Please specify the type of area you currently reside in:</label>
+
+                    <label class="label-heading" style="margin-top: 15px; display: block;">Please specify the type of area you currently reside in:</label>
                     <select name="area" required class="styled-select">
                         <option value="" disabled selected>Select your group...</option>
                         <option value="Rural">Rural (Village)</option>
                         <option value="Urban">Urban (Town/City)</option>
-                         </select>
-
+                    </select>
                 </div>
             </section>
 
-            <section class="card video-card">
-                <div class="card-header">
-                    <span class="badge">Video 01</span>
-                    <span class="instruction">Watch carefully, then decide.</span>
+            <div id="dynamic-questions-container">
                 </div>
-                
-                <div class="video-wrapper">
-                    <video src="videos/v1.mp4" controls controlslist="nodownload" class="research-video" data-id="v1"></video>
-                </div>
-
-                <div class="question-block">
-                    <p class="question-text">Is this video Real or AI-Generated?</p>
-                    <div class="options-grid">
-                        <label class="option-card">
-                            <input type="radio" name="v1_answer" value="Real" required data-id="v1">
-                            <div class="option-content">
-                                <span class="emoji">📹</span>
-                                <span>Real Video</span>
-                            </div>
-                        </label>
-                        <label class="option-card">
-                            <input type="radio" name="v1_answer" value="AI" required data-id="v1">
-                            <div class="option-content">
-                                <span class="emoji">🤖</span>
-                                <span>AI Generated</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <input type="hidden" name="v1_time" id="v1_timer">
-            </section>
-
-            <section class="card video-card">
-                <div class="card-header">
-                    <span class="badge">Video 02</span>
-                    <span class="instruction">Watch carefully, then decide.</span>
-                </div>
-                
-                <div class="video-wrapper">
-                    <video src="videos/v2.mp4" controls controlslist="nodownload" class="research-video" data-id="v2"></video>
-                </div>
-
-                <div class="question-block">
-                    <p class="question-text">Is this video Real or AI-Generated?</p>
-                    <div class="options-grid">
-                        <label class="option-card">
-                            <input type="radio" name="v2_answer" value="Real" required data-id="v2">
-                            <div class="option-content">
-                                <span class="emoji">📹</span>
-                                <span>Real Video</span>
-                            </div>
-                        </label>
-                        <label class="option-card">
-                            <input type="radio" name="v2_answer" value="AI" required data-id="v2">
-                            <div class="option-content">
-                                <span class="emoji">🤖</span>
-                                <span>AI Generated</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <input type="hidden" name="v2_time" id="v2_timer">
-            </section>
 
             <div class="submit-area">
                 <button type="submit" class="submit-btn">Submit Research Data</button>
@@ -143,14 +83,14 @@
                 <p class="share-subtitle">My AI Detection Score:</p>
                 
                 <div class="score-circle">
-                    <span id="user-score">0</span>/<span id="total-questions">2</span>
+                    <span id="user-score">0</span>/<span id="total-questions">5</span>
                 </div>
                 
                 <h3 id="roast-title" class="roast-title"></h3>
                 <p id="roast-message" class="roast-message"></p>
                 
                 <div class="share-footer">
-                   genzgames.netlify.app
+                    www.libraryinfoscience.in
                 </div>
             </div>
 
@@ -160,7 +100,8 @@
             <button id="download-btn" class="submit-btn" style="background: #10b981; margin-bottom: 15px;">
                 📸 Download Score to Share
             </button>
-<div class="social-share-container">
+
+            <div class="social-share-container">
                 <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px;">Or share your score directly:</p>
                 <div class="social-buttons">
                     <a href="#" id="share-wa" target="_blank" class="social-btn wa">WhatsApp</a>
@@ -171,8 +112,7 @@
             </div>
 
             <br>
-                        <a href="https://gamifiedquiz1.web.app
-" class="home-link">Take a Digital Literacy Quiz</a>
+            <a href="https://www.libraryinfoscience.in" class="home-link">Visit Library Info Science</a>
         </div>
     </div>
 

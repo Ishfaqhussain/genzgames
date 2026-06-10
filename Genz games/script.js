@@ -1,14 +1,80 @@
 // ==========================================
-// 1. CONFIGURATION
+// 1. CONFIGURATION & DATABASE
 // ==========================================
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzIcMTLbIHsGzU6jxvZbpUGblwh48JJn0nDQp4622Gbek7NJp1pSivZ4_z3CBNx9Vka/exec'; 
+const scriptURL = 'https://script.google.com/macros/s/ABC'; 
 
-// ==========================================
-// 2. TIMER LOGIC (Per Question)
-// ==========================================
+// Master Database: Add all 40 videos and their correct answers here
+const masterVideoBank = [
+    { id: 'v1', answer: 'Real' },
+    { id: 'v2', answer: 'AI' },
+    { id: 'v3', answer: 'Real' },
+    { id: 'v4', answer: 'AI' },
+    { id: 'v5', answer: 'Real' },
+    { id: 'v6', answer: 'AI' },
+    { id: 'v7', answer: 'Real' },
+    { id: 'v8', answer: 'AI' },
+    // Keep adding up to { id: 'v40', answer: 'AI' }
+];
+
+const QUESTIONS_PER_USER = 5;
 let startTimes = {}; 
+let currentAnswerKey = {}; // Stores the answers for the 5 selected videos
 
+// ==========================================
+// 2. DYNAMIC RENDERING & TIMER LOGIC
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Shuffle and pick 5 random videos
+    const shuffledBank = masterVideoBank.sort(() => 0.5 - Math.random());
+    const selectedVideos = shuffledBank.slice(0, QUESTIONS_PER_USER);
+
+    // 2. Generate HTML
+    const container = document.getElementById('dynamic-questions-container');
+    let htmlContent = '';
+
+    selectedVideos.forEach((video, index) => {
+        // Build answer key for grading
+        currentAnswerKey[`${video.id}_answer`] = video.answer;
+
+        htmlContent += `
+        <section class="card video-card">
+            <div class="card-header">
+                <span class="badge">Video 0${index + 1}</span>
+                <span class="instruction">Watch carefully, then decide.</span>
+            </div>
+            
+            <div class="video-wrapper">
+                <video src="videos/${video.id}.mp4" controls controlslist="nodownload" class="research-video" data-id="${video.id}"></video>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">Is this video Real or AI-Generated?</p>
+                <div class="options-grid">
+                    <label class="option-card">
+                        <input type="radio" name="${video.id}_answer" value="Real" required data-id="${video.id}">
+                        <div class="option-content">
+                            <span class="emoji">📹</span>
+                            <span>Real Video</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="${video.id}_answer" value="AI" required data-id="${video.id}">
+                        <div class="option-content">
+                            <span class="emoji">🤖</span>
+                            <span>AI Generated</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <input type="hidden" name="${video.id}_time" id="${video.id}_timer">
+        </section>`;
+    });
+
+    // Inject into the page
+    container.innerHTML = htmlContent;
+
+    // 3. Attach Event Listeners (Must happen AFTER HTML is injected)
     const videos = document.querySelectorAll('.research-video');
     videos.forEach(video => {
         video.addEventListener('play', (e) => {
@@ -43,32 +109,23 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 const form = document.getElementById('researchForm');
 const submitBtn = document.querySelector('.submit-btn');
-const statusMsg = document.getElementById('status-message');
 const resultsScreen = document.getElementById('results-screen');
-
-// 🔴 THE ANSWER KEY (Set to correct answers)
-const answerKey = {
-    v1_answer: "Real", 
-    v2_answer: "AI"    
-};
 
 form.addEventListener('submit', e => {
     e.preventDefault();
     
-    // Grade the user
+    // Grade the user using the dynamic answer key
     let score = 0;
-    const totalQuestions = Object.keys(answerKey).length;
     const formData = new FormData(form);
 
-    for (const [question, correctAnswer] of Object.entries(answerKey)) {
+    for (const [question, correctAnswer] of Object.entries(currentAnswerKey)) {
         if (formData.get(question) === correctAnswer) {
             score++;
         }
     }
 
     // Determine the Roast
-  
-const percentage = (score / totalQuestions) * 100;
+    const percentage = (score / QUESTIONS_PER_USER) * 100;
     let title = "";
     let message = "";
 
@@ -88,28 +145,24 @@ const percentage = (score / totalQuestions) * 100;
         title = "Certified Room Temperature IQ.";
         message = "Zero points?! Did you even open your eyes, or did you just smash the screen with your forehead? Even a random number generator would score higher.";
     }
+    
     // Update the UI
     document.getElementById('user-score').innerText = score;
-    document.getElementById('total-questions').innerText = totalQuestions;
     document.getElementById('roast-title').innerText = title;
     document.getElementById('roast-message').innerText = message;
 
-    // Send Data
     submitBtn.disabled = true;
     submitBtn.innerHTML = "Calculating your IQ...";
-// ... (This goes right before the 'fetch' command in your script.js) ...
 
-    // 5. GENERATE DYNAMIC SOCIAL SHARE LINKS
-    // IMPORTANT: Replace this with your actual Netlify Live URL once deployed!
-    const testUrl = "https://genzgames.netlify.app"; 
-    const shareText = `I just scored ${score}/${totalQuestions} on the LIS AI Deepfake Test! Are you a Terminator or an NPC? Take the test: `;
+    // Generate Dynamic Social Share Links
+    const testUrl = "https://www.libraryinfoscience.in"; 
+    const shareText = `I just scored ${score}/${QUESTIONS_PER_USER} on the AI Deepfake Test! Are you a Terminator or an NPC? Take the test: `;
 
     document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + testUrl)}`;
     document.getElementById('share-x').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(testUrl)}`;
     document.getElementById('share-reddit').href = `https://www.reddit.com/submit?url=${encodeURIComponent(testUrl)}&title=${encodeURIComponent(shareText)}`;
     
-    // ... (Now the fetch command starts here) ...
-    
+    // Submit to Google Sheets
     fetch(scriptURL, { method: 'POST', body: formData })
         .then(response => {
             form.style.display = 'none';
@@ -118,7 +171,6 @@ const percentage = (score / totalQuestions) * 100;
         })
         .catch(error => {
             console.error('Error!', error.message);
-            // Show results even if Google Sheets fails slightly
             form.style.display = 'none';
             resultsScreen.style.display = 'block';
             window.scrollTo(0, 0);
