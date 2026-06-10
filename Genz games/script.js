@@ -1,7 +1,7 @@
 // ==========================================
 // 1. CONFIGURATION & DATABASE
 // ==========================================
-const scriptURL = 'https://script.google.com/macros/s/ABC'; 
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzIcMTLbIHsGzU6jxvZbpUGblwh48JJn0nDQp4622Gbek7NJp1pSivZ4_z3CBNx9Vka/exec'; 
 
 // Master Database: Add all 40 videos and their correct answers here
 const masterVideoBank = [
