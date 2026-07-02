@@ -1,122 +1,821 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Perception Study | University of Kashmir</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>AI vs Real Video Perception Study</title>
+
+<meta name="description"
+content="Academic research investigating human ability to distinguish authentic videos from AI-generated videos.">
+
+<meta name="keywords"
+content="AI videos, deepfake detection, synthetic media, research, human perception, misinformation">
+
+<meta name="author"
+content="Ishfaq Hussain">
+
+<meta name="robots"
+content="index,follow">
+
+<meta name="theme-color"
+content="#0f172a">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="style.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+</script>
+
 </head>
+
 <body>
 
-    <div class="container">
-        <header>
-            <div class="logo">AI vs Real Research</div>
-            <h1>Synthetic Media Detection Study</h1>
-            <p class="subtitle">Can you distinguish between Reality and AI?</p>
-        </header>
+<div class="container">
 
-        <form name="ai_study_v1" id="researchForm">
-            
-            <section class="card intro-card">
-                <div class="consent-box">
-                    <label class="checkbox-container">
-                        <input type="checkbox" required>
-                        <span class="checkmark"></span>
-                        <span class="text">I agree to participate in this anonymous academic study.</span>
-                    </label>
-                </div>
+<header class="hero-section">
 
-                <div class="form-group">
-                    <label class="label-heading">Which generation do you belong to?</label>
-                    <select name="generation" required class="styled-select">
-                        <option value="" disabled selected>Select your group...</option>
-                        <option value="Alpha">Gen Alpha (2013-Present)</option>
-                        <option value="GenZ">Gen Z (1997-2012)</option>
-                        <option value="Millennial">Millennial (1981-1996)</option>
-                        <option value="GenX">Gen X (1965-1980)</option>
-                        <option value="Baby_boomers">Baby Boomers (Born 1946–1964)</option>
-                    </select>
+<h1>
 
-                    <label class="label-heading" style="margin-top: 15px; display: block;">Current level of education?</label>
-                    <select name="Education Level" required class="styled-select">
-                        <option value="" disabled selected>Select your group...</option>
-                        <option value="Higher_Secondary">Higher Secondary/High School</option>
-                        <option value="Undergraduate">Undergraduate (Bachelors)</option>
-                        <option value="postgraduate">Postgraduate (Masters)</option>
-                        <option value="PhD">PhD Scholar/Doctorate</option>
-                    </select>
+AI vs Real Video Perception Study
 
-                    <label class="label-heading" style="margin-top: 15px; display: block;">What is your primary field of study?</label>
-                    <select name="study_field" required class="styled-select">
-                        <option value="" disabled selected>Select your field...</option>
-                        <option value="Medical_Health">Medical & Health Sciences</option>
-                        <option value="STEM">STEM (Science, Tech, Engineering, Math)</option>
-                        <option value="Social_Sciences">Social Sciences</option>
-                        <option value="Arts_Humanities">Arts & Humanities</option>
-                        <option value="Business_Commerce">Business & Commerce</option>
-                        <option value="Other">Other</option>
-                    </select>
+</h1>
 
-                    <label class="label-heading" style="margin-top: 15px; display: block;">Please specify the type of area you currently reside in:</label>
-                    <select name="area" required class="styled-select">
-                        <option value="" disabled selected>Select your group...</option>
-                        <option value="Rural">Rural (Village)</option>
-                        <option value="Urban">Urban (Town/City)</option>
-                    </select>
-                </div>
-            </section>
+<p class="subtitle">
 
-            <div id="dynamic-questions-container">
-                </div>
+This study investigates how accurately people distinguish authentic videos from AI-generated videos.
 
-            <div class="submit-area">
-                <button type="submit" class="submit-btn">Submit Research Data</button>
-                <p id="status-message"></p>
-            </div>
-        </form>
+</p>
 
-        <div id="results-screen" style="display: none;" class="card text-center">
-            
-            <div id="capture-area" class="share-card">
-                <h2 class="share-title">Synthetic Media Study</h2>
-                <p class="share-subtitle">My AI Detection Score:</p>
-                
-                <div class="score-circle">
-                    <span id="user-score">0</span>/<span id="total-questions">5</span>
-                </div>
-                
-                <h3 id="roast-title" class="roast-title"></h3>
-                <p id="roast-message" class="roast-message"></p>
-                
-                <div class="share-footer">
-                    www.libraryinfoscience.in
-                </div>
-            </div>
+<div class="study-information">
 
-            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Your data was successfully submitted for research. Thanks for being a guinea pig!</p>
-            
-            <button id="download-btn" class="submit-btn" style="background: #10b981; margin-bottom: 15px;">
-                📸 Download Score to Share
-            </button>
+<div class="study-item">
 
-            <div class="social-share-container">
-                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px;">Or share your score directly:</p>
-                <div class="social-buttons">
-                    <a href="#" id="share-wa" target="_blank" class="social-btn wa">WhatsApp</a>
-                    <a href="#" id="share-x" target="_blank" class="social-btn x">X (Twitter)</a>
-                    <a href="#" id="share-reddit" target="_blank" class="social-btn reddit">Reddit</a>
-                </div>
-                <p style="font-size: 0.8rem; color: #888;">For Instagram, use the Download button above and add it to your Story!</p>
-            </div>
+<strong>
 
-            <br>
-            <a href="https://www.libraryinfoscience.in" class="home-link">Visit Library Info Science</a>
-        </div>
-    </div>
+Estimated Duration
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="script.js"></script>
+</strong>
+
+<span>
+
+3–5 Minutes
+
+</span>
+
+</div>
+
+<div class="study-item">
+
+<strong>
+
+Videos
+
+</strong>
+
+<span>
+
+5 Random Stimuli
+
+</span>
+
+</div>
+
+<div class="study-item">
+
+<strong>
+
+Task
+
+</strong>
+
+<span>
+
+Identify each video as Real or AI Generated
+
+</span>
+
+</div>
+
+</div>
+
+</header>
+
+<form
+
+id="researchForm"
+
+autocomplete="off"
+
+novalidate
+
+>
+
+<section class="card">
+
+<h2>
+
+Participant Information
+
+</h2>
+
+<div class="participant-id-box">
+
+<label>
+
+Participant ID
+
+</label>
+
+<div
+
+id="participantID"
+
+class="participant-id"
+
+>
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="consent-box">
+
+<label class="checkbox-container">
+
+<input
+
+type="checkbox"
+
+required
+
+id="consent"
+
+>
+
+<span>
+
+I voluntarily agree to participate in this anonymous academic research study.
+
+No personally identifiable information will be collected.
+
+I understand that I may discontinue participation at any time before submitting my responses.
+
+</span>
+
+</label>
+
+</div>
+
+</section>
+
+<section class="card">
+
+<h2>
+
+Demographic Information
+
+</h2>
+
+<label class="label-heading">
+
+Generation
+
+</label>
+
+<select
+
+name="generation"
+
+required
+
+class="styled-select"
+
+>
+
+<option value="" disabled selected>
+
+Select...
+
+</option>
+
+<option>
+
+Baby Boomer
+
+</option>
+
+<option>
+
+Generation X
+
+</option>
+
+<option>
+
+Millennial (Generation Y)
+
+</option>
+
+<option>
+
+Generation Z
+
+</option>
+
+<option>
+
+Generation Alpha
+
+</option>
+
+</select>
+
+<label class="label-heading">
+
+Gender
+
+</label>
+
+<select
+
+name="gender"
+
+required
+
+class="styled-select"
+
+>
+
+<option value="" disabled selected>
+
+Select...
+
+</option>
+
+<option>
+
+Male
+
+</option>
+
+<option>
+
+Female
+
+</option>
+
+<option>
+
+Non-binary
+
+</option>
+
+<option>
+
+Prefer not to say
+
+</option>
+
+</select>
+
+<label class="label-heading">
+
+Highest Education
+
+</label>
+
+<select
+
+name="education"
+
+required
+
+class="styled-select"
+
+>
+
+<option value="" disabled selected>
+
+Select...
+
+</option>
+
+<option>
+
+High School
+
+</option>
+
+<option>
+
+Diploma
+
+</option>
+
+<option>
+
+Undergraduate
+
+</option>
+
+<option>
+
+Postgraduate
+
+</option>
+
+<option>
+
+Doctorate
+
+</option>
+
+<option>
+
+Other
+
+</option>
+
+</select>
+
+<label class="label-heading">
+
+Occupation / Field of Study
+
+</label>
+
+<input
+
+type="text"
+
+name="occupation"
+
+class="styled-input"
+
+placeholder="Example: Engineering"
+
+required
+
+>
+
+<label class="label-heading">
+
+Area of Residence
+
+</label>
+
+<select
+
+name="area"
+
+required
+
+class="styled-select"
+
+>
+
+<option value="" disabled selected>
+
+Select...
+
+</option>
+
+<option>
+
+Urban
+
+</option>
+
+<option>
+
+Rural
+
+</option>
+
+</select>
+
+<label class="label-heading">
+
+How frequently do you use AI tools such as ChatGPT, Gemini, Copilot or similar applications?
+
+</label>
+
+<select
+
+name="aiFrequency"
+
+required
+
+class="styled-select"
+
+>
+
+<option value="" disabled selected>
+
+Select...
+
+</option>
+
+<option>
+
+Daily
+
+</option>
+
+<option>
+
+Several times a week
+
+</option>
+
+<option>
+
+Weekly
+
+</option>
+
+<option>
+
+Monthly
+
+</option>
+
+<option>
+
+Rarely
+
+</option>
+
+<option>
+
+Never
+
+</option>
+
+</select>
+
+</section>
+
+<section class="card experiment-card">
+
+<div class="experiment-header">
+
+<h2>
+
+Experimental Session
+
+</h2>
+
+<div class="progress-box">
+
+<div>
+
+Stimulus
+
+<span id="progressNumber">
+
+1
+
+</span>
+
+of
+
+5
+
+</div>
+
+</div>
+
+</div>
+
+<div
+
+id="dynamic-questions-container"
+
+>
+
+<!-- Generated dynamically by script.js -->
+
+</div>
+
+</section>
+
+
+<div class="submit-section">
+
+<button
+
+type="submit"
+
+class="submit-btn"
+
+>
+
+Finish Study
+
+</button>
+
+<p class="submit-note">
+
+Your responses are anonymous and will be used only for academic research.
+
+</p>
+
+</div>
+
+</form>
+
+<!-- ===================================================== -->
+<!-- RESULTS SCREEN -->
+<!-- ===================================================== -->
+
+<section
+
+id="results-screen"
+
+style="display:none"
+
+>
+
+<div
+
+id="capture-area"
+
+class="result-card"
+
+>
+
+<div class="result-header">
+
+<h2>
+
+AI Video Perception Study
+
+</h2>
+
+<p>
+
+Participant Results
+
+</p>
+
+</div>
+
+<div class="score-container">
+
+<div class="score-circle">
+
+<span id="user-score">
+
+0
+
+</span>
+
+<span>
+
+/5
+
+</span>
+
+</div>
+
+</div>
+
+<h3
+
+id="roast-title"
+
+>
+
+Processing...
+
+</h3>
+
+<p
+
+id="roast-message"
+
+>
+
+Calculating your perceptual accuracy...
+
+</p>
+
+<div class="result-summary">
+
+<div class="summary-item">
+
+<strong>
+
+Study
+
+</strong>
+
+<span>
+
+AI vs Real Video Perception
+
+</span>
+
+</div>
+
+<div class="summary-item">
+
+<strong>
+
+Stimuli Viewed
+
+</strong>
+
+<span>
+
+5
+
+</span>
+
+</div>
+
+<div class="summary-item">
+
+<strong>
+
+Version
+
+</strong>
+
+<span>
+
+2.0
+
+</span>
+
+</div>
+
+</div>
+
+<p class="thank-you">
+
+Thank you for contributing to academic research.
+
+</p>
+
+</div>
+
+<div class="download-section">
+
+<button
+
+id="download-btn"
+
+class="download-btn"
+
+type="button"
+
+>
+
+Download Score Card
+
+</button>
+
+</div>
+
+<div class="share-section">
+
+<h3>
+
+Share the Study
+
+</h3>
+
+<p>
+
+Invite others to participate by sharing the study.
+
+</p>
+
+<div class="share-buttons">
+
+<a
+
+id="share-wa"
+
+target="_blank"
+
+class="share-btn whatsapp"
+
+>
+
+WhatsApp
+
+</a>
+
+<a
+
+id="share-x"
+
+target="_blank"
+
+class="share-btn twitter"
+
+>
+
+X
+
+</a>
+
+<a
+
+id="share-reddit"
+
+target="_blank"
+
+class="share-btn reddit"
+
+>
+
+Reddit
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="footer">
+
+<p>
+
+© 2026 AI vs Real Video Perception Study
+
+</p>
+
+<p>
+
+Developed for academic research.
+
+</p>
+
+</footer>
+
+</div>
+
+<script>
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+const participantCode=
+
+"P-"+
+
+crypto.randomUUID()
+
+.replace(/-/g,"")
+
+.substring(0,8)
+
+.toUpperCase();
+
+document.getElementById(
+
+"participantID"
+
+).textContent=
+
+participantCode;
+
+});
+
+</script>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>

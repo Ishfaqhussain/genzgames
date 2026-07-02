@@ -322,3 +322,704 @@ video {
 .wa { background: #25D366; }
 .x { background: #000000; }
 .reddit { background: #FF4500; }
+
+/* ==========================================================
+   VERSION 2.0
+   NEW RESEARCH COMPONENTS
+========================================================== */
+
+.hero-section{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.study-information{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+.study-item{
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:14px;
+
+    text-align:center;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+
+}
+
+.study-item strong{
+
+    display:block;
+
+    color:var(--primary);
+
+    font-size:.82rem;
+
+    text-transform:uppercase;
+
+    margin-bottom:6px;
+
+    letter-spacing:.5px;
+
+}
+
+.study-item span{
+
+    font-size:.95rem;
+
+    color:var(--text-main);
+
+    font-weight:600;
+
+}
+
+.participant-id-box{
+
+    background:#eff6ff;
+
+    border:1px solid #bfdbfe;
+
+    border-radius:10px;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+}
+
+.participant-id-box label{
+
+    display:block;
+
+    font-size:.8rem;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+
+}
+
+.participant-id{
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    color:#111827;
+
+}
+
+.experiment-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.progress-box{
+
+    background:#eff6ff;
+
+    border-radius:30px;
+
+    padding:8px 18px;
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+    border:1px solid #bfdbfe;
+
+}
+
+.progress-box span{
+
+    font-size:1rem;
+
+    color:#111827;
+
+}
+
+.styled-input{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:8px;
+
+    font-size:1rem;
+
+    box-sizing:border-box;
+
+    margin-bottom:18px;
+
+}
+
+.styled-input:focus,
+
+.styled-select:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+
+}
+
+.submit-section{
+
+    margin-top:30px;
+
+}
+
+.submit-note{
+
+    text-align:center;
+
+    color:var(--text-sub);
+
+    margin-top:12px;
+
+    font-size:.85rem;
+
+}
+/* ==========================================================
+   VIDEO CARD IMPROVEMENTS
+========================================================== */
+
+.video-card{
+
+    transition:.25s ease;
+
+}
+
+.video-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.video-wrapper{
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    background:#000;
+
+    margin-bottom:18px;
+
+}
+
+.research-video{
+
+    width:100%;
+
+    display:block;
+
+    background:#000;
+
+}
+
+.question-block{
+
+    margin-top:20px;
+
+}
+
+.question-text{
+
+    font-size:1.05rem;
+
+    font-weight:700;
+
+    text-align:center;
+
+    margin-bottom:18px;
+
+}
+
+.options-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:14px;
+
+}
+
+.option-card{
+
+    display:block;
+
+}
+
+.option-content{
+
+    min-height:90px;
+
+    justify-content:center;
+
+}
+
+.option-content span:last-child{
+
+    font-weight:700;
+
+}
+
+.option-card:hover .option-content{
+
+    border-color:#93c5fd;
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   RESULTS
+========================================================== */
+
+.result-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.result-header h2{
+
+    margin-bottom:5px;
+
+}
+
+.result-header p{
+
+    color:var(--text-sub);
+
+}
+
+.score-container{
+
+    margin:25px 0;
+
+}
+
+.score-circle{
+
+    width:140px;
+
+    height:140px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:linear-gradient(135deg,#2563eb,#1e40af);
+
+    color:white;
+
+    font-size:2.8rem;
+
+    font-weight:800;
+
+    box-shadow:0 12px 35px rgba(37,99,235,.35);
+
+}
+
+.score-circle span:last-child{
+
+    font-size:1rem;
+
+    opacity:.85;
+
+}
+
+.result-summary{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:14px;
+
+    margin:30px 0;
+
+}
+
+.summary-item{
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+}
+
+.summary-item strong{
+
+    display:block;
+
+    color:var(--primary);
+
+    margin-bottom:6px;
+
+    font-size:.8rem;
+
+    text-transform:uppercase;
+
+}
+
+.summary-item span{
+
+    font-weight:700;
+
+}
+
+.download-section{
+
+    margin-top:20px;
+
+    margin-bottom:20px;
+
+}
+
+.download-btn{
+
+    width:100%;
+
+    background:var(--success);
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:16px;
+
+    cursor:pointer;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.download-btn:hover{
+
+    filter:brightness(.95);
+
+}
+
+.share-section{
+
+    margin-top:30px;
+
+    text-align:center;
+
+}
+
+.share-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    margin-top:15px;
+
+}
+
+.share-btn{
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.whatsapp{
+
+    background:#25D366;
+
+}
+
+.twitter{
+
+    background:#000;
+
+}
+
+.reddit{
+
+    background:#ff4500;
+
+}
+
+.share-btn:hover{
+
+    transform:translateY(-2px);
+
+    opacity:.95;
+
+}
+
+/* ==========================================================
+   LOADING
+========================================================== */
+
+.loading{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:50px;
+
+}
+
+.spinner{
+
+    width:42px;
+
+    height:42px;
+
+    border:4px solid #dbeafe;
+
+    border-top:4px solid var(--primary);
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+========================================================== */
+
+button:focus,
+
+select:focus,
+
+input:focus,
+
+video:focus{
+
+    outline:3px solid #60a5fa;
+
+    outline-offset:2px;
+
+}
+
+button{
+
+    transition:.25s;
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:768px){
+
+.study-information{
+
+grid-template-columns:1fr;
+
+}
+
+.result-summary{
+
+grid-template-columns:1fr;
+
+}
+
+.options-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.experiment-header{
+
+flex-direction:column;
+
+gap:12px;
+
+align-items:flex-start;
+
+}
+
+.progress-box{
+
+width:100%;
+
+text-align:center;
+
+}
+
+.card{
+
+padding:18px;
+
+}
+
+.score-circle{
+
+width:120px;
+
+height:120px;
+
+font-size:2.3rem;
+
+}
+
+.submit-btn{
+
+font-size:1rem;
+
+}
+
+}
+
+@media(max-width:480px){
+
+body{
+
+padding:12px;
+
+}
+
+h1{
+
+font-size:1.55rem;
+
+}
+
+.subtitle{
+
+font-size:.9rem;
+
+}
+
+.study-item{
+
+padding:10px;
+
+}
+
+.result-card{
+
+padding:22px;
+
+}
+
+.participant-id{
+
+font-size:1rem;
+
+}
+
+.question-text{
+
+font-size:1rem;
+
+}
+
+}
+
+/* ==========================================================
+   END OF VERSION 2.0 CSS
+========================================================== */

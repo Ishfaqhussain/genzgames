@@ -1,220 +1,1198 @@
-// ==========================================
-// 1. CONFIGURATION & DATABASE
-// ==========================================
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzIcMTLbIHsGzU6jxvZbpUGblwh48JJn0nDQp4622Gbek7NJp1pSivZ4_z3CBNx9Vka/exec'; 
+// ==========================================================
+// AI vs REAL VIDEO PERCEPTION STUDY
+// Version 2.0
+// Research Edition
+// ==========================================================
 
-// Master Database: Add all 40 videos and their correct answers here
-const masterVideoBank = [
-    { id: 'v1', answer: 'Real' },
-    { id: 'v2', answer: 'AI' },
-    { id: 'v3', answer: 'Real' },
-    { id: 'v4', answer: 'AI' },
-    { id: 'v5', answer: 'Real' },
-    { id: 'v6', answer: 'AI' },
-    { id: 'v7', answer: 'Real' },
-    { id: 'v8', answer: 'AI' },
-    // Keep adding up to { id: 'v40', answer: 'AI' }
+// ==========================================================
+// CONFIGURATION
+// ==========================================================
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8KheIF5ajstyShk0WAHpqg7sUG3K8GYz8OC1pWN1bmpWhE70MeoPFZ4OvfwqMHC9i/exec";
+
+const EXPERIMENT = {
+
+    VERSION: "2.0",
+
+    MODEL: "Omni",
+
+    QUESTIONS_PER_USER: 5
+
+};
+
+// ==========================================================
+// CATEGORY ORDER
+// ==========================================================
+
+const CATEGORY_ORDER = [
+
+    "human",
+    "physics",
+    "nature",
+    "urban",
+    "text"
+
 ];
 
-const QUESTIONS_PER_USER = 5;
-let startTimes = {}; 
-let currentAnswerKey = {}; // Stores the answers for the 5 selected videos
+// ==========================================================
+// VIDEO DATABASE
+// ==========================================================
 
-// ==========================================
-// 2. DYNAMIC RENDERING & TIMER LOGIC
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Shuffle and pick 5 random videos
-    const shuffledBank = masterVideoBank.sort(() => 0.5 - Math.random());
-    const selectedVideos = shuffledBank.slice(0, QUESTIONS_PER_USER);
+const VIDEO_BANK = {
 
-    // 2. Generate HTML
-    const container = document.getElementById('dynamic-questions-container');
-    let htmlContent = '';
+    human: [
 
-    selectedVideos.forEach((video, index) => {
-        // Build answer key for grading
-        currentAnswerKey[`${video.id}_answer`] = video.answer;
+        {
+            id: "A1",
+            category: "Human",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
 
-        htmlContent += `
-        <section class="card video-card">
-            <div class="card-header">
-                <span class="badge">Video 0${index + 1}</span>
-                <span class="instruction">Watch carefully, then decide.</span>
-            </div>
-            
-            <div class="video-wrapper">
-                <video src="videos/${video.id}.mp4" controls controlslist="nodownload" class="research-video" data-id="${video.id}"></video>
-            </div>
+        {
+            id: "R1",
+            category: "Human",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
 
-            <div class="question-block">
-                <p class="question-text">Is this video Real or AI-Generated?</p>
-                <div class="options-grid">
-                    <label class="option-card">
-                        <input type="radio" name="${video.id}_answer" value="Real" required data-id="${video.id}">
-                        <div class="option-content">
-                            <span class="emoji">📹</span>
-                            <span>Real Video</span>
-                        </div>
-                    </label>
-                    <label class="option-card">
-                        <input type="radio" name="${video.id}_answer" value="AI" required data-id="${video.id}">
-                        <div class="option-content">
-                            <span class="emoji">🤖</span>
-                            <span>AI Generated</span>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            <input type="hidden" name="${video.id}_time" id="${video.id}_timer">
-        </section>`;
-    });
+        {
+            id: "A2",
+            category: "Human",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
 
-    // Inject into the page
-    container.innerHTML = htmlContent;
+        {
+            id: "R2",
+            category: "Human",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
 
-    // 3. Attach Event Listeners (Must happen AFTER HTML is injected)
-    const videos = document.querySelectorAll('.research-video');
-    videos.forEach(video => {
-        video.addEventListener('play', (e) => {
-            const videoId = e.target.getAttribute('data-id');
-            if (!startTimes[videoId]) {
-                startTimes[videoId] = Date.now();
-            }
-        });
-    });
+        {
+            id: "A3",
+            category: "Human",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
 
-    const inputs = document.querySelectorAll('input[type="radio"]');
-    inputs.forEach(input => {
-        input.addEventListener('change', (e) => {
-            const videoId = e.target.getAttribute('data-id');
-            if (startTimes[videoId]) {
-                const endTime = Date.now();
-                const duration = endTime - startTimes[videoId]; 
-                const hiddenInput = document.getElementById(`${videoId}_timer`);
-                if (hiddenInput) {
-                    hiddenInput.value = duration;
-                }
-            } else {
-                const hiddenInput = document.getElementById(`${videoId}_timer`);
-                if (hiddenInput) hiddenInput.value = "0"; 
-            }
-        });
-    });
-});
+        {
+            id: "R3",
+            category: "Human",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
 
-// ==========================================
-// 3. GAMIFIED SUBMISSION & ROAST LOGIC
-// ==========================================
-const form = document.getElementById('researchForm');
-const submitBtn = document.querySelector('.submit-btn');
-const resultsScreen = document.getElementById('results-screen');
+        {
+            id: "A4",
+            category: "Human",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    
-    // Grade the user using the dynamic answer key
-    let score = 0;
-    const formData = new FormData(form);
-
-    for (const [question, correctAnswer] of Object.entries(currentAnswerKey)) {
-        if (formData.get(question) === correctAnswer) {
-            score++;
+        {
+            id: "R4",
+            category: "Human",
+            source: "Real",
+            model: null,
+            answer: "Real"
         }
+
+    ],
+
+    physics: [
+
+        {
+            id: "A5",
+            category: "Physics",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R5",
+            category: "Physics",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A6",
+            category: "Physics",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R6",
+            category: "Physics",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A7",
+            category: "Physics",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R7",
+            category: "Physics",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A8",
+            category: "Physics",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R8",
+            category: "Physics",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        }
+
+    ],
+
+    nature: [
+
+        {
+            id: "A9",
+            category: "Nature",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R9",
+            category: "Nature",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A10",
+            category: "Nature",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R10",
+            category: "Nature",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A11",
+            category: "Nature",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R11",
+            category: "Nature",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A12",
+            category: "Nature",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R12",
+            category: "Nature",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        }
+
+    ],
+
+    urban: [
+
+        {
+            id: "A13",
+            category: "Urban",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R13",
+            category: "Urban",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A14",
+            category: "Urban",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R14",
+            category: "Urban",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A15",
+            category: "Urban",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R15",
+            category: "Urban",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A16",
+            category: "Urban",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R16",
+            category: "Urban",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        }
+
+    ],
+
+    text: [
+
+        {
+            id: "A17",
+            category: "Text",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R17",
+            category: "Text",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A18",
+            category: "Text",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R18",
+            category: "Text",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A19",
+            category: "Text",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R19",
+            category: "Text",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        },
+
+        {
+            id: "A20",
+            category: "Text",
+            source: "AI",
+            model: "Omni",
+            answer: "AI"
+        },
+
+        {
+            id: "R20",
+            category: "Text",
+            source: "Real",
+            model: null,
+            answer: "Real"
+        }
+
+    ]
+
+};
+
+// ==========================================================
+// EXPERIMENT STATE
+// ==========================================================
+
+const experiment = {
+
+    participantID: crypto.randomUUID(),
+
+    version: EXPERIMENT.VERSION,
+
+    model: EXPERIMENT.MODEL,
+
+    startedAt: new Date().toISOString(),
+
+    browser: navigator.userAgent,
+
+    language: navigator.language,
+
+    screenWidth: window.innerWidth,
+
+    screenHeight: window.innerHeight,
+
+    responses: []
+
+};
+
+const currentAnswerKey = {};
+
+const selectedVideos = [];
+
+const playbackData = {};
+
+const QUESTIONS_PER_USER = EXPERIMENT.QUESTIONS_PER_USER;
+
+// ==========================================================
+// UTILITIES
+// ==========================================================
+
+function shuffle(array){
+
+    const arr=[...array];
+
+    for(let i=arr.length-1;i>0;i--){
+
+        const j=Math.floor(Math.random()*(i+1));
+
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+
     }
 
-    // Determine the Roast
-    const percentage = (score / QUESTIONS_PER_USER) * 100;
-    let title = "";
-    let message = "";
+    return arr;
 
-    if (percentage === 100) {
-        title = "Are you a terminator?";
-        message = "Flawless. You see right through the matrix. Please protect us when the robots take over.";
-    } else if (percentage >= 75) {
-        title = "Not completely useless!";
-        message = "You survived... barely. You're smart enough to avoid obvious scams, but a good deepfake will still steal your identity.";
-    } else if (percentage >= 50) {
-        title = "Absolute NPC Energy.";
-        message = "Average. Mediocre. You're definitely out here forwarding WhatsApp University rumors to your family group chat without checking them.";
-    } else if (percentage > 0) {
-        title = "A Threat to Society.";
-        message = "Oof. You are the exact reason Nigerian Princes still make a living sending emails. Please stay off the internet for your own safety.";
-    } else {
-        title = "Certified Room Temperature IQ.";
-        message = "Zero points?! Did you even open your eyes, or did you just smash the screen with your forehead? Even a random number generator would score higher.";
-    }
-    
-    // Update the UI
-    document.getElementById('user-score').innerText = score;
-    document.getElementById('roast-title').innerText = title;
-    document.getElementById('roast-message').innerText = message;
+}
 
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = "Calculating your IQ...";
+function selectStimuli(){
 
-    // Generate Dynamic Social Share Links
-    const testUrl = "https://www.libraryinfoscience.in"; 
-    const shareText = `I just scored ${score}/${QUESTIONS_PER_USER} on the AI Deepfake Test! Are you a Terminator or an NPC? Take the test: `;
+    CATEGORY_ORDER.forEach(category=>{
 
-    document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + testUrl)}`;
-    document.getElementById('share-x').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(testUrl)}`;
-    document.getElementById('share-reddit').href = `https://www.reddit.com/submit?url=${encodeURIComponent(testUrl)}&title=${encodeURIComponent(shareText)}`;
-    
-    // Submit to Google Sheets
-    fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => {
-            form.style.display = 'none';
-            resultsScreen.style.display = 'block';
-            window.scrollTo(0, 0); 
-        })
-        .catch(error => {
-            console.error('Error!', error.message);
-            form.style.display = 'none';
-            resultsScreen.style.display = 'block';
-            window.scrollTo(0, 0);
-        });
+        const stimulus=shuffle(VIDEO_BANK[category])[0];
+
+        selectedVideos.push(stimulus);
+
+    });
+
+    return shuffle(selectedVideos);
+
+}
+
+const experimentStimuli=selectStimuli();
+// ==========================================================
+// DYNAMIC RENDERING
+// ==========================================================
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const container=document.getElementById("dynamic-questions-container");
+
+    let html="";
+
+    experimentStimuli.forEach((video,index)=>{
+
+        currentAnswerKey[`${video.id}_answer`]=video.answer;
+
+        playbackData[video.id]={
+
+            started:false,
+
+            startTime:0,
+
+            responseTime:0,
+
+            replayCount:0,
+
+            completion:0,
+
+            answered:false,
+
+            order:index+1
+
+        };
+
+        html+=`
+
+<section class="card video-card">
+
+<div class="card-header">
+
+<span class="badge">
+
+Stimulus ${index+1}
+
+</span>
+
+<span class="instruction">
+
+Watch carefully before answering.
+
+</span>
+
+</div>
+
+<div class="video-wrapper">
+
+<video
+
+src="videos/${video.id}.mp4"
+
+class="research-video"
+
+data-id="${video.id}"
+
+controls
+
+playsinline
+
+disablePictureInPicture
+
+controlslist="nodownload"
+
+preload="metadata"
+
+></video>
+
+</div>
+
+<div class="question-block">
+
+<p class="question-text">
+
+Do you believe this video is authentic or AI-generated?
+
+</p>
+
+<div class="options-grid">
+
+<label class="option-card">
+
+<input
+
+type="radio"
+
+name="${video.id}_answer"
+
+value="Real"
+
+data-id="${video.id}"
+
+required
+
+>
+
+<div class="option-content">
+
+<span class="emoji">📹</span>
+
+<span>Authentic</span>
+
+</div>
+
+</label>
+
+<label class="option-card">
+
+<input
+
+type="radio"
+
+name="${video.id}_answer"
+
+value="AI"
+
+data-id="${video.id}"
+
+required
+
+>
+
+<div class="option-content">
+
+<span class="emoji">🤖</span>
+
+<span>AI Generated</span>
+
+</div>
+
+</label>
+
+</div>
+
+</div>
+
+<input
+
+type="hidden"
+
+name="${video.id}_time"
+
+id="${video.id}_timer"
+
+>
+
+</section>
+
+`;
+
+    });
+
+    container.innerHTML=html;
+
+    initialiseVideoTracking();
+
+    initialiseAnswerTracking();
+
 });
 
-// ==========================================
-// 4. HTML2CANVAS SCREENSHOT LOGIC
-// ==========================================
-const downloadBtn = document.getElementById('download-btn');
+// ==========================================================
+// VIDEO TRACKING
+// ==========================================================
 
-if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
-        const originalText = downloadBtn.innerHTML;
-        downloadBtn.innerHTML = "Generating Image...";
-        downloadBtn.disabled = true;
+function initialiseVideoTracking(){
 
-        const captureArea = document.getElementById('capture-area');
+    const videos=document.querySelectorAll(".research-video");
 
-        html2canvas(captureArea, {
-            scale: 2, 
-            useCORS: true, 
-            backgroundColor: null 
-        }).then(canvas => {
-            const imageURL = canvas.toDataURL("image/png");
+    videos.forEach(video=>{
 
-            const link = document.createElement('a');
-            link.download = 'AI-Detection-Score.png';
-            link.href = imageURL;
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        const id=video.dataset.id;
 
-            downloadBtn.innerHTML = "✅ Downloaded! Now share it.";
-            setTimeout(() => {
-                downloadBtn.innerHTML = originalText;
-                downloadBtn.disabled = false;
-            }, 3000);
-        }).catch(err => {
-            console.error("Screenshot failed:", err);
-            alert("Oops! Couldn't generate the image. Try taking a normal screenshot!");
-            downloadBtn.innerHTML = originalText;
-            downloadBtn.disabled = false;
+        video.addEventListener("play",()=>{
+
+            if(!playbackData[id].started){
+
+                playbackData[id].started=true;
+
+                playbackData[id].startTime=performance.now();
+
+            }else{
+
+                playbackData[id].replayCount++;
+
+            }
+
         });
+
+        video.addEventListener("ended",()=>{
+
+            playbackData[id].completion=100;
+
+        });
+
+        video.addEventListener("timeupdate",()=>{
+
+            if(video.duration){
+
+                playbackData[id].completion=
+
+                Math.round(
+
+                    (video.currentTime/video.duration)*100
+
+                );
+
+            }
+
+        });
+
     });
+
 }
+
+// ==========================================================
+// ANSWER TRACKING
+// ==========================================================
+
+function initialiseAnswerTracking(){
+
+    const radios=document.querySelectorAll(
+
+        'input[type="radio"]'
+
+    );
+
+    radios.forEach(radio=>{
+
+        radio.addEventListener("change",event=>{
+
+            const id=event.target.dataset.id;
+
+            if(playbackData[id].answered) return;
+
+            playbackData[id].answered=true;
+
+            if(playbackData[id].started){
+
+                playbackData[id].responseTime=
+
+                Math.round(
+
+                    performance.now()-
+
+                    playbackData[id].startTime
+
+                );
+
+            }
+
+            const timer=document.getElementById(
+
+                `${id}_timer`
+
+            );
+
+            timer.value=
+
+            playbackData[id].responseTime;
+
+        });
+
+    });
+
+}
+
+// ==========================================================
+// SCORE ENGINE
+// ==========================================================
+
+function calculateScore(formData){
+
+    let score=0;
+
+    Object.entries(currentAnswerKey)
+
+    .forEach(([question,correct])=>{
+
+        if(formData.get(question)===correct){
+
+            score++;
+
+        }
+
+    });
+
+    return score;
+
+}
+
+// ==========================================================
+// RESPONSE COLLECTION
+// ==========================================================
+
+function buildResponses(formData){
+
+    experiment.responses=[];
+
+    experimentStimuli.forEach(video=>{
+
+        const userAnswer=formData.get(
+
+            `${video.id}_answer`
+
+        );
+
+        experiment.responses.push({
+
+            participantID:
+
+            experiment.participantID,
+
+            experimentVersion:
+
+            experiment.version,
+
+            model:
+
+            video.model,
+
+            videoID:
+
+            video.id,
+
+            category:
+
+            video.category,
+
+            source:
+
+            video.source,
+
+            correctAnswer:
+
+            video.answer,
+
+            participantAnswer:
+
+            userAnswer,
+
+            isCorrect:
+
+            userAnswer===video.answer,
+
+            responseTime:
+
+            playbackData[video.id].responseTime,
+
+            replayCount:
+
+            playbackData[video.id].replayCount,
+
+            completion:
+
+            playbackData[video.id].completion,
+
+            order:
+
+            playbackData[video.id].order,
+
+            timestamp:
+
+            new Date().toISOString()
+
+        });
+
+    });
+
+}
+
+// ==========================================================
+// FORM SUBMISSION
+// ==========================================================
+
+const form=document.getElementById("researchForm");
+
+const submitBtn=document.querySelector(".submit-btn");
+
+const resultsScreen=document.getElementById("results-screen");
+
+form.addEventListener("submit",async(event)=>{
+
+    event.preventDefault();
+
+    submitBtn.disabled=true;
+
+    submitBtn.innerHTML="Processing...";
+
+    const formData=new FormData(form);
+
+    const score=calculateScore(formData);
+
+    buildResponses(formData);
+
+    const percentage=Math.round(
+
+        (score/QUESTIONS_PER_USER)*100
+
+    );
+
+    const roast=getRoast(score);
+
+    updateResults(score,roast);
+
+    const payload=buildPayload(formData,score);
+
+    try{
+
+        await fetch(
+
+            SCRIPT_URL,
+
+            {
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+                body:JSON.stringify(payload)
+
+            }
+
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+    form.style.display="none";
+
+    resultsScreen.style.display="block";
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+});
+
+// ==========================================================
+// PAYLOAD
+// ==========================================================
+
+function buildPayload(formData,score){
+
+    return{
+
+participant:{
+
+participantID:
+experiment.participantID,
+
+experimentVersion:
+experiment.version,
+
+startedAt:
+experiment.startedAt,
+
+browser:
+experiment.browser,
+
+language:
+experiment.language,
+
+screenWidth:
+experiment.screenWidth,
+
+screenHeight:
+experiment.screenHeight,
+
+generation:
+formData.get("generation"),
+
+gender:
+formData.get("gender"),
+
+education:
+formData.get("education"),
+
+occupation:
+formData.get("occupation"),
+
+area:
+formData.get("area"),
+
+aiFrequency:
+formData.get("aiFrequency")
+
+},
+
+        score:score,
+
+        totalQuestions:
+
+        QUESTIONS_PER_USER,
+
+        responses:
+
+        experiment.responses
+
+    };
+
+}
+
+// ==========================================================
+// RESULT SCREEN
+// ==========================================================
+
+function updateResults(score,roast){
+
+    document.getElementById(
+
+        "user-score"
+
+    ).innerText=score;
+
+    document.getElementById(
+
+        "roast-title"
+
+    ).innerText=roast.title;
+
+    document.getElementById(
+
+        "roast-message"
+
+    ).innerText=roast.message;
+
+    buildShareLinks(score);
+
+}
+
+// ==========================================================
+// ROAST ENGINE
+// ==========================================================
+
+function getRoast(score){
+
+    const percentage=
+
+    (score/QUESTIONS_PER_USER)*100;
+
+    if(percentage===100){
+
+        return{
+
+            title:
+
+            "Are you a Terminator?",
+
+            message:
+
+            "Flawless. You spotted every synthetic video."
+
+        };
+
+    }
+
+    if(percentage>=75){
+
+        return{
+
+            title:
+
+            "Excellent Eye",
+
+            message:
+
+            "You detect synthetic media better than most people."
+
+        };
+
+    }
+
+    if(percentage>=50){
+
+        return{
+
+            title:
+
+            "Average Observer",
+
+            message:
+
+            "Some AI fooled you. You're not alone."
+
+        };
+
+    }
+
+    if(percentage>0){
+
+        return{
+
+            title:
+
+            "AI Got You",
+
+            message:
+
+            "Modern AI videos remain surprisingly convincing."
+
+        };
+
+    }
+
+    return{
+
+        title:
+
+        "Completely Fooled",
+
+        message:
+
+        "Every video fooled you. Don't worry, you're not the only one."
+
+    };
+
+}
+
+// ==========================================================
+// SHARE LINKS
+// ==========================================================
+
+function buildShareLinks(score){
+
+    const url=
+
+    "https://gennzgames.netlify.app";
+
+    const text=
+
+    `I scored ${score}/${QUESTIONS_PER_USER} in the AI Video Perception Study. Can you do better?`;
+
+    document.getElementById(
+
+        "share-wa"
+
+    ).href=
+
+    `https://api.whatsapp.com/send?text=${encodeURIComponent(text+" "+url)}`;
+
+    document.getElementById(
+
+        "share-x"
+
+    ).href=
+
+    `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+
+    document.getElementById(
+
+        "share-reddit"
+
+    ).href=
+
+    `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(text)}`;
+
+}
+
+// ==========================================================
+// DOWNLOAD SCORE CARD
+// ==========================================================
+
+const downloadBtn=
+
+document.getElementById(
+
+    "download-btn"
+
+);
+
+if(downloadBtn){
+
+    downloadBtn.addEventListener(
+
+        "click",
+
+        async()=>{
+
+            const capture=
+
+            document.getElementById(
+
+                "capture-area"
+
+            );
+
+            const canvas=
+
+            await html2canvas(
+
+                capture,
+
+                {
+
+                    scale:2,
+
+                    useCORS:true,
+
+                    backgroundColor:null
+
+                }
+
+            );
+
+            const link=
+
+            document.createElement("a");
+
+            link.download=
+
+            "AI-Video-Perception-Score.png";
+
+            link.href=
+
+            canvas.toDataURL();
+
+            link.click();
+
+        }
+
+    );
+
+}
+
+// ==========================================================
+// END OF SCRIPT.JS
+// VERSION 2.0
+// ==========================================================
