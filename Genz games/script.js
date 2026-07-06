@@ -504,10 +504,58 @@ Watch carefully before answering.
 </div>
 
 <div class="video-wrapper">
+const VIDEO_URLS = {
+
+A1: ,
+R1: "https://res.cloudinary.com/...",
+A2: "https://res.cloudinary.com/...",
+R2: "https://res.cloudinary.com/...",
+
+// ...
+A1: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333984/A1.mp4",
+A2: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333988/A2.mp4",
+A3: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333986/A3.mp4",
+A4: " https://res.cloudinary.com/hvrkirot/video/upload/v1783333989/A4.mp4",
+A5: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333992/A5.mp4",
+A6: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333994/A6.mp4",
+A7: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333997/A7.mp4",
+A8: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334000/A8.mp4",
+A9: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334001/A9.mp4",
+A10: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334001/A10.mp4",
+A11: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334004/A11.mp4",
+A12: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334005/A12.mp4",
+A13: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334006/A13.mp4",
+A14: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334011/A14.mp4",
+A15: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334014/A15.mp4",
+A16: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334015/A16.mp4",
+A17: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334015/A17.mp4",
+A18: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334017/A18.mp4",
+A19: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334020/A19.mp4",
+R1: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334022/R1.mp4",
+R2: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334024/R2.mp4",
+R3: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334027/R3.mp4",
+R4: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334027/R4.mp4",
+R5: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334029/R5.mp4",
+R6: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334034/R6.mp4",
+R7: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333997/A7.mp4",
+R8: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334035/R8.mp4",
+R9: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334047/R9.mp4",
+R10: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334042/R10.mp4",
+R11: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334050/R11.mp4",
+R12: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334051/R12.mp4",
+R13: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334049/R13.mp4",
+R14: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334057/R14.mp4",
+R15: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334081/R15.mp4",
+R16: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334055/R16.mp4",
+R17: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334054/R17.mp4",
+R18: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334062/R18.mp4",
+R19: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334058/R19.mp4",
+R20: "https://res.cloudinary.com/hvrkirot/video/upload/v1783334059/R20.mp4"
+};
 
 <video
 
-src="videos/${video.id}.mp4"
+src="${VIDEO_URLS[video.id]}"
 
 class="research-video"
 
