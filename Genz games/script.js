@@ -506,12 +506,6 @@ Watch carefully before answering.
 <div class="video-wrapper">
 const VIDEO_URLS = {
 
-A1: ,
-R1: "https://res.cloudinary.com/...",
-A2: "https://res.cloudinary.com/...",
-R2: "https://res.cloudinary.com/...",
-
-// ...
 A1: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333984/A1.mp4",
 A2: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333988/A2.mp4",
 A3: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333986/A3.mp4",
