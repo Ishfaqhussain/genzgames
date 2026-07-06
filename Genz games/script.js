@@ -9,6 +9,7 @@
 // ==========================================================
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8KheIF5ajstyShk0WAHpqg7sUG3K8GYz8OC1pWN1bmpWhE70MeoPFZ4OvfwqMHC9i/exec";
+https://script.google.com/macros/s/AKfycby8KheIF5ajstyShk0WAHpqg7sUG3K8GYz8OC1pWN1bmpWhE70MeoPFZ4OvfwqMHC9i/exec
 
 const EXPERIMENT = {
 
@@ -905,34 +906,27 @@ form.addEventListener("submit",async(event)=>{
     updateResults(score,roast);
 
     const payload=buildPayload(formData,score);
+try{
 
-    try{
+    await fetch(
 
-        await fetch(
+        SCRIPT_URL,
 
-            SCRIPT_URL,
+        {
 
-            {
+            method:"POST",
 
-                method:"POST",
+            body:JSON.stringify(payload)
 
-                headers:{
+        }
 
-                    "Content-Type":"application/json"
+    );
 
-                },
+}catch(error){
 
-                body:JSON.stringify(payload)
+    console.error(error);
 
-            }
-
-        );
-
-    }catch(error){
-
-        console.error(error);
-
-    }
+}
 
     form.style.display="none";
 
