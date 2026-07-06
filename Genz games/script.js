@@ -9,8 +9,6 @@
 // ==========================================================
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8KheIF5ajstyShk0WAHpqg7sUG3K8GYz8OC1pWN1bmpWhE70MeoPFZ4OvfwqMHC9i/exec";
-https://script.google.com/macros/s/AKfycby8KheIF5ajstyShk0WAHpqg7sUG3K8GYz8OC1pWN1bmpWhE70MeoPFZ4OvfwqMHC9i/exec
-
 const EXPERIMENT = {
 
     VERSION: "2.0",
