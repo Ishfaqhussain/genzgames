@@ -478,46 +478,7 @@ function shuffle(array){
 
 }
 
-function selectStimuli() {
-
-    selectedVideos.length = 0;
-
-    // Randomly decide the participant's quota
-    // true = 3 AI + 2 Real
-    // false = 2 AI + 3 Real
-
-    const threeAI = Math.random() < 0.5;
-
-    // Randomly choose which categories will contribute AI videos
-    const shuffledCategories = shuffle([...CATEGORY_ORDER]);
-
-    const aiCategories = threeAI
-        ? shuffledCategories.slice(0, 3)
-        : shuffledCategories.slice(0, 2);
-
-    CATEGORY_ORDER.forEach(category => {
-
-        const pool = VIDEO_BANK[category].filter(video => {
-
-            if (aiCategories.includes(category)) {
-                return video.source === "AI";
-            }
-
-            return video.source === "Real";
-
-        });
-
-        selectedVideos.push(shuffle(pool)[0]);
-
-    });
-
-    return shuffle(selectedVideos);
-
-}
-
-const experimentStimuli = selectStimuli();
-
-// ==========================================================
+f// ==========================================================
 // DYNAMIC RENDERING
 // ==========================================================
 
@@ -680,8 +641,7 @@ id="${video.id}_timer"
     initialiseVideoTracking();
 
     initialiseAnswerTracking();
-enforceVideoCompletion();
-
+revealOptionsOnPlay();
 
 });
 
@@ -1252,70 +1212,28 @@ if(downloadBtn){
     );
 
 }
-// ==========================================================
-// FORCE VIDEO TO BE WATCHED BEFORE ANSWERING
-// ==========================================================
+function revealOptionsOnPlay(){
 
-function enforceVideoCompletion() {
-
-    const submitBtn = document.querySelector(".submit-btn");
-
-    document.querySelectorAll(".research-video").forEach(video => {
+    document.querySelectorAll(".research-video").forEach(video=>{
 
         const id = video.dataset.id;
 
-        // Disable answers initially
-        document.querySelectorAll(`input[name="${id}_answer"]`)
-            .forEach(input => input.disabled = true);
+        const options = document.querySelector(
+            `input[name="${id}_answer"]`
+        ).closest(".question-block");
 
-        playbackData[id].watched = false;
+        options.style.display = "none";
 
-        video.addEventListener("timeupdate", function () {
+        video.addEventListener("play",function(){
 
-            if (!playbackData[id].watched &&
-                video.currentTime >= video.duration * 0.95) {
+            options.style.display = "block";
 
-                playbackData[id].watched = true;
-
-                document.querySelectorAll(`input[name="${id}_answer"]`)
-                    .forEach(input => input.disabled = false);
-
-                checkReady();
-
-            }
-
-        });
+        },{once:true});
 
     });
-
-    document.querySelectorAll('input[type="radio"]').forEach(radio => {
-
-        radio.addEventListener("change", function () {
-
-            playbackData[this.dataset.id].answered = true;
-
-            checkReady();
-
-        });
-
-    });
-
-    function checkReady() {
-
-        const ready = experimentStimuli.every(video => {
-
-            return playbackData[video.id].watched &&
-                   playbackData[video.id].answered;
-
-        });
-
-        submitBtn.disabled = !ready;
-
-    }
-
-    checkReady();
 
 }
+
 // ==========================================================
 // END OF SCRIPT.JS
 // VERSION 2.0
