@@ -680,6 +680,8 @@ id="${video.id}_timer"
     initialiseVideoTracking();
 
     initialiseAnswerTracking();
+enforceVideoCompletion();
+
 
 });
 
@@ -1250,7 +1252,70 @@ if(downloadBtn){
     );
 
 }
+// ==========================================================
+// FORCE VIDEO TO BE WATCHED BEFORE ANSWERING
+// ==========================================================
 
+function enforceVideoCompletion() {
+
+    const submitBtn = document.querySelector(".submit-btn");
+
+    document.querySelectorAll(".research-video").forEach(video => {
+
+        const id = video.dataset.id;
+
+        // Disable answers initially
+        document.querySelectorAll(`input[name="${id}_answer"]`)
+            .forEach(input => input.disabled = true);
+
+        playbackData[id].watched = false;
+
+        video.addEventListener("timeupdate", function () {
+
+            if (!playbackData[id].watched &&
+                video.currentTime >= video.duration * 0.95) {
+
+                playbackData[id].watched = true;
+
+                document.querySelectorAll(`input[name="${id}_answer"]`)
+                    .forEach(input => input.disabled = false);
+
+                checkReady();
+
+            }
+
+        });
+
+    });
+
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+
+        radio.addEventListener("change", function () {
+
+            playbackData[this.dataset.id].answered = true;
+
+            checkReady();
+
+        });
+
+    });
+
+    function checkReady() {
+
+        const ready = experimentStimuli.every(video => {
+
+            return playbackData[video.id].watched &&
+                   playbackData[video.id].answered;
+
+        });
+
+        submitBtn.disabled = !ready;
+
+    }
+
+    checkReady();
+
+}
 // ==========================================================
 // END OF SCRIPT.JS
 // VERSION 2.0
