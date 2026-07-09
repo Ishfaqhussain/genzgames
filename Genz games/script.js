@@ -478,13 +478,36 @@ function shuffle(array){
 
 }
 
-function selectStimuli(){
+function selectStimuli() {
 
-    CATEGORY_ORDER.forEach(category=>{
+    selectedVideos.length = 0;
 
-        const stimulus=shuffle(VIDEO_BANK[category])[0];
+    // Randomly decide the participant's quota
+    // true = 3 AI + 2 Real
+    // false = 2 AI + 3 Real
 
-        selectedVideos.push(stimulus);
+    const threeAI = Math.random() < 0.5;
+
+    // Randomly choose which categories will contribute AI videos
+    const shuffledCategories = shuffle([...CATEGORY_ORDER]);
+
+    const aiCategories = threeAI
+        ? shuffledCategories.slice(0, 3)
+        : shuffledCategories.slice(0, 2);
+
+    CATEGORY_ORDER.forEach(category => {
+
+        const pool = VIDEO_BANK[category].filter(video => {
+
+            if (aiCategories.includes(category)) {
+                return video.source === "AI";
+            }
+
+            return video.source === "Real";
+
+        });
+
+        selectedVideos.push(shuffle(pool)[0]);
 
     });
 
@@ -492,7 +515,8 @@ function selectStimuli(){
 
 }
 
-const experimentStimuli=selectStimuli();
+const experimentStimuli = selectStimuli();
+
 // ==========================================================
 // DYNAMIC RENDERING
 // ==========================================================
