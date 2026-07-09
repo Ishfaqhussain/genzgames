@@ -642,7 +642,6 @@ id="${video.id}_timer"
 
     initialiseAnswerTracking();
 revealOptionsOnPlay();
-
 });
 
 // ==========================================================
@@ -1212,28 +1211,38 @@ if(downloadBtn){
     );
 
 }
+
+// ==========================================================
+// ENABLE ANSWERS AFTER VIDEO STARTS
+// ==========================================================
+
 function revealOptionsOnPlay(){
 
     document.querySelectorAll(".research-video").forEach(video=>{
 
         const id = video.dataset.id;
 
-        const options = document.querySelector(
+        const radios = document.querySelectorAll(
             `input[name="${id}_answer"]`
-        ).closest(".question-block");
+        );
 
-        options.style.display = "none";
+        // Disable answer options initially
+        radios.forEach(radio=>{
+            radio.disabled = true;
+        });
 
+        // Enable after the participant presses Play
         video.addEventListener("play",function(){
 
-            options.style.display = "block";
+            radios.forEach(radio=>{
+                radio.disabled = false;
+            });
 
-        },{once:true});
+        }, { once:true });
 
     });
 
 }
-
 // ==========================================================
 // END OF SCRIPT.JS
 // VERSION 2.0
