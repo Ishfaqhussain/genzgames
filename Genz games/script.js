@@ -641,7 +641,7 @@ id="${video.id}_timer"
     initialiseVideoTracking();
 
     initialiseAnswerTracking();
-revealOptionsOnPlay();
+
 });
 
 // ==========================================================
@@ -1216,33 +1216,6 @@ if(downloadBtn){
 // ENABLE ANSWERS AFTER VIDEO STARTS
 // ==========================================================
 
-function revealOptionsOnPlay(){
-
-    document.querySelectorAll(".research-video").forEach(video=>{
-
-        const id = video.dataset.id;
-
-        const radios = document.querySelectorAll(
-            `input[name="${id}_answer"]`
-        );
-
-        // Disable answer options initially
-        radios.forEach(radio=>{
-            radio.disabled = true;
-        });
-
-        // Enable after the participant presses Play
-        video.addEventListener("play",function(){
-
-            radios.forEach(radio=>{
-                radio.disabled = false;
-            });
-
-        }, { once:true });
-
-    });
-
-}
 // ==========================================================
 // END OF SCRIPT.JS
 // VERSION 2.0
