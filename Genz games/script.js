@@ -24,7 +24,7 @@ const VIDEO_URLS = {
 A1: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333984/A1.mp4",
 A2: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333988/A2.mp4",
 A3: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333986/A3.mp4",
-A4: " https://res.cloudinary.com/hvrkirot/video/upload/v1783333989/A4.mp4",
+A4: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333989/A4.mp4",
 A5: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333992/A5.mp4",
 A6: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333994/A6.mp4",
 A7: "https://res.cloudinary.com/hvrkirot/video/upload/v1783333997/A7.mp4",
@@ -478,6 +478,45 @@ function shuffle(array){
 
 }
 
+function selectStimuli() {
+
+    selectedVideos.length = 0;
+
+    // Randomly decide the participant's quota
+    // true = 3 AI + 2 Real
+    // false = 2 AI + 3 Real
+
+    const threeAI = Math.random() < 0.5;
+
+    // Randomly choose which categories will contribute AI videos
+    const shuffledCategories = shuffle([...CATEGORY_ORDER]);
+
+    const aiCategories = threeAI
+        ? shuffledCategories.slice(0, 3)
+        : shuffledCategories.slice(0, 2);
+
+    CATEGORY_ORDER.forEach(category => {
+
+        const pool = VIDEO_BANK[category].filter(video => {
+
+            if (aiCategories.includes(category)) {
+                return video.source === "AI";
+            }
+
+            return video.source === "Real";
+
+        });
+
+        selectedVideos.push(shuffle(pool)[0]);
+
+    });
+
+    return shuffle(selectedVideos);
+
+}
+
+const experimentStimuli = selectStimuli();
+
 // ==========================================================
 // DYNAMIC RENDERING
 // ==========================================================
@@ -641,7 +680,8 @@ id="${video.id}_timer"
     initialiseVideoTracking();
 
     initialiseAnswerTracking();
-    revealOptionsOnPlay();
+
+revealOptionsOnPlay();
 });
 
 // ==========================================================
@@ -1211,7 +1251,6 @@ if(downloadBtn){
     );
 
 }
-
 // ==========================================================
 // ENABLE ANSWERS AFTER VIDEO STARTS
 // ==========================================================
