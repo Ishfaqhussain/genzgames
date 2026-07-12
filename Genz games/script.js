@@ -682,6 +682,7 @@ id="${video.id}_timer"
     initialiseAnswerTracking();
 
 revealOptionsOnPlay();
+initialiseSubmitValidation();
 });
 
 // ==========================================================
@@ -1278,6 +1279,43 @@ function revealOptionsOnPlay(){
             });
 
         }, { once:true });
+
+    });
+
+}
+// ==========================================================
+// ENABLE SUBMIT ONLY AFTER ALL VIDEOS PLAYED & ANSWERED
+// ==========================================================
+
+function initialiseSubmitValidation() {
+
+    const submitBtn = document.querySelector(".submit-btn");
+
+    submitBtn.disabled = true;
+
+    function checkCompletion() {
+
+        const completed = experimentStimuli.every(video => {
+
+            return playbackData[video.id].started &&
+                   playbackData[video.id].answered;
+
+        });
+
+        submitBtn.disabled = !completed;
+    }
+
+    // Check when a video starts playing
+    document.querySelectorAll(".research-video").forEach(video => {
+
+        video.addEventListener("play", checkCompletion);
+
+    });
+
+    // Check when an answer is selected
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+
+        radio.addEventListener("change", checkCompletion);
 
     });
 

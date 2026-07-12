@@ -1018,8 +1018,18 @@ font-size:1rem;
 
 }
 
+.validation-message{
+    display:none;
+    margin-top:12px;
+    padding:10px 12px;
+    border-radius:8px;
+    background:#fff3cd;
+    color:#856404;
+    border:1px solid #ffeeba;
+    font-size:0.9rem;
+    font-weight:500;
 }
-
+}
 /* ==========================================================
    END OF VERSION 2.0 CSS
 ========================================================== */
